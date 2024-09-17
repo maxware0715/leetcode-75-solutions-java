@@ -2,21 +2,23 @@ package array_string;
 
 public class GreatestCommonDivisorOfStrings {
 
-    public String gcdOfStrings(String firstString, String secondString) {
-        if (!isConcatenationEqual(firstString, secondString)) {
+    public int gcd(int x, int y) {
+        if (y == 0) {
+            return x;
+        } else {
+            return gcd(y, x % y);
+        }    
+    }
+    
+    public String gcdOfStrings(String str1, String str2) {
+        // Check if they have non-zero GCD string.
+        if (!(str1 + str2).equals(str2 + str1)) {
             return "";
         }
-
-        int commonGCD = computeGCD(firstString.length(), secondString.length());
-        return firstString.substring(0, commonGCD);
-    }
-
-    private boolean isConcatenationEqual(String first, String second) {
-        return (first + second).equals(second + first);
-    }
-
-    private int computeGCD(int num1, int num2) {
-        return (num2 == 0) ? num1 : computeGCD(num2, num1 % num2);
+        
+        // Get the GCD of the two lengths.
+        int gcdLength = gcd(str1.length(), str2.length());
+        return str1.substring(0, gcdLength);
     }
 
     public static void main(String[] args) {
